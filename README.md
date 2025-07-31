@@ -23,7 +23,7 @@ Outputs results for all insertions in a single command.
 bash
 Copy
 Edit
-git clone https://github.com/yourusername/distributed-sqlite-simulation.git
+git clone https://github.com/Arpitmahajan123/distributed-sqlite-simulation.git
 cd distributed-sqlite-simulation
 - 2. Install Requirements
 This project uses Python 3 and standard libraries. No extra installations required.

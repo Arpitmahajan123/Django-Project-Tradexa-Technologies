@@ -1,8 +1,7 @@
 # Distributed SQLite Simulation
 This project simulates a distributed system using multiple SQLite databases for different models (Users, Orders, and Products). Each model is stored in its own SQLite database. The program supports simultaneous insertions using multithreading to simulate concurrent operations on distributed data stores.
 
-﻿# Simulation Video
- https://github.com/user-attachments/assets/a85e98a6-3181-4a92-9ac6-bc7dd83edfac
+https://github.com/user-attachments/assets/a85e98a6-3181-4a92-9ac6-bc7dd83edfac
 
 # Models and Databases
 Model	Fields	Database

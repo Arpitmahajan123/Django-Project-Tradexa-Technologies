@@ -66,7 +66,7 @@ class Command(BaseCommand):
         )
     
     def handle(self, *args, **options):
-        self.stdout.write("🚀 Starting Django Distributed System Simulation")
+        self.stdout.write("Starting Django Distributed System Simulation")
         self.stdout.write("=" * 60)
         
         if options['clear_data']:
@@ -76,13 +76,13 @@ class Command(BaseCommand):
     
     def clear_databases(self):
         """Clear all databases before insertion"""
-        self.stdout.write("🗑️  Clearing existing data...")
+        self.stdout.write("Clearing existing data...")
         
         User.objects.using('users_db').all().delete()
         Product.objects.using('products_db').all().delete()
         Order.objects.using('orders_db').all().delete()
         
-        self.stdout.write("✅ Data cleared successfully")
+        self.stdout.write("Data cleared successfully")
     
     def insert_user(self, user_data: tuple, thread_id: int):
         """Insert a single user record"""
@@ -244,16 +244,16 @@ class Command(BaseCommand):
     
     def display_results(self, execution_time: float):
         """Display insertion results"""
-        self.stdout.write(f"\n⏱️  Total Execution Time: {execution_time:.3f} seconds")
-        self.stdout.write(f"🧵 Total Threads Created: {len(self.users_data) + len(self.products_data) + len(self.orders_data)}")
+        self.stdout.write(f"\nTotal Execution Time: {execution_time:.3f} seconds")
+        self.stdout.write(f"Total Threads Created: {len(self.users_data) + len(self.products_data) + len(self.orders_data)}")
         
         # Users results
         self.stdout.write("\n" + "=" * 60)
-        self.stdout.write("👤 USERS INSERTION RESULTS")
+        self.stdout.write("USERS INSERTION RESULTS")
         self.stdout.write("=" * 60)
         success_count = 0
         for result in sorted(self.results['users'], key=lambda x: x['data']['id']):
-            status_icon = "✅" if result['status'] == 'SUCCESS' else "❌"
+            status_icon = "" if result['status'] == 'SUCCESS' else ""
             self.stdout.write(f"{status_icon} Thread-{result['thread_id']} [{result['timestamp']}]")
             self.stdout.write(f"   ID: {result['data']['id']}, Name: '{result['data']['name']}', Email: '{result['data']['email']}'")
             if result['status'] == 'FAILED':
@@ -262,15 +262,15 @@ class Command(BaseCommand):
                 success_count += 1
             self.stdout.write("")
         
-        self.stdout.write(f"📊 Users Summary: {success_count}/{len(self.users_data)} successful insertions")
+        self.stdout.write(f"Users Summary: {success_count}/{len(self.users_data)} successful insertions")
         
         # Products results
         self.stdout.write("\n" + "=" * 60)
-        self.stdout.write("📦 PRODUCTS INSERTION RESULTS")
+        self.stdout.write("PRODUCTS INSERTION RESULTS")
         self.stdout.write("=" * 60)
         success_count = 0
         for result in sorted(self.results['products'], key=lambda x: x['data']['id']):
-            status_icon = "✅" if result['status'] == 'SUCCESS' else "❌"
+            status_icon = "" if result['status'] == 'SUCCESS' else ""
             self.stdout.write(f"{status_icon} Thread-{result['thread_id']} [{result['timestamp']}]")
             self.stdout.write(f"   ID: {result['data']['id']}, Name: '{result['data']['name']}', Price: ${result['data']['price']}")
             if result['status'] == 'FAILED':
@@ -279,15 +279,15 @@ class Command(BaseCommand):
                 success_count += 1
             self.stdout.write("")
         
-        self.stdout.write(f"📊 Products Summary: {success_count}/{len(self.products_data)} successful insertions")
+        self.stdout.write(f"Products Summary: {success_count}/{len(self.products_data)} successful insertions")
         
         # Orders results
         self.stdout.write("\n" + "=" * 60)
-        self.stdout.write("🛒 ORDERS INSERTION RESULTS")
+        self.stdout.write("ORDERS INSERTION RESULTS")
         self.stdout.write("=" * 60)
         success_count = 0
         for result in sorted(self.results['orders'], key=lambda x: x['data']['id']):
-            status_icon = "✅" if result['status'] == 'SUCCESS' else "❌"
+            status_icon = "" if result['status'] == 'SUCCESS' else ""
             self.stdout.write(f"{status_icon} Thread-{result['thread_id']} [{result['timestamp']}]")
             self.stdout.write(f"   ID: {result['data']['id']}, User ID: {result['data']['user_id']}, Product ID: {result['data']['product_id']}, Quantity: {result['data']['quantity']}")
             if result['status'] == 'FAILED':
@@ -296,7 +296,7 @@ class Command(BaseCommand):
                 success_count += 1
             self.stdout.write("")
         
-        self.stdout.write(f"📊 Orders Summary: {success_count}/{len(self.orders_data)} successful insertions")
+        self.stdout.write(f"Orders Summary: {success_count}/{len(self.orders_data)} successful insertions")
         
         # Final summary
         total_success = (len([r for r in self.results['users'] if r['status'] == 'SUCCESS']) +
